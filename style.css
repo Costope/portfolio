@@ -1412,6 +1412,37 @@ body.modal-open {
   -webkit-user-select: none;
 }
 
+/* 1. Standard-Style für deinen Link */
+.footer-link {
+  color: #3B82F6;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  transition: color 0.2s ease-in-out;
+}
+
+/* 2. Die unsichtbare Linie in der Mitte vorbereiten */
+.footer-link::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 1px;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #60A5FA;
+  transition: width 0.3s ease-in-out;
+}
+
+/* 3. Hover-Effekt: Farbe ändern & Linie ausfahren */
+.footer-link:hover {
+  color: #60A5FA;
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}
+
 #heart-easter-egg {
   cursor: pointer;
   display: inline-block;
@@ -1451,6 +1482,7 @@ body.modal-open {
   align-items: center;
   gap: 6px;
   padding: 4px 10px;
+  margin-top: 16px;
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
