@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Costope | Projects</title>
+
+  <link rel="shortcut icon" href="assets/website-icon.png" type="image/x-icon" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Navbar -->
+  <script src="navbar.js"></script>
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="container">
+
+    <main id="main">
+      <header class="page-head">
+        <p class="kicker">Selected work</p>
+        <h1 class="title">My Projects</h1>
+        <p class="page-sub">
+          A collection of things I've built.
+        </p>
+
+        <div class="projects-toolbar" aria-label="Project filters">
+          <div class="projects-search">
+            <input id="projectSearch" class="search" type="text" placeholder="Search projects…" autocomplete="off" />
+            <div class="search-hint" id="resultHint" aria-live="polite"></div>
+          </div>
+
+          <div class="tags" aria-label="Project categories">
+            <button class="tag tag-btn is-active" type="button" data-filter="all">All</button>
+            <button class="tag tag-btn" type="button" data-filter="web">Web</button>
+            <button class="tag tag-btn" type="button" data-filter="tools">Tools</button>
+            <button class="tag tag-btn" type="button" data-filter="linux">Linux</button>
+            <button class="tag tag-btn" type="button" data-filter="hardware">Hardware</button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Featured Project -->
+      <section class="featured" aria-label="Featured project">
+        <a
+          class="featured-card"
+          href="#"
+          data-project
+          data-title="Project One"
+          data-desc="A short highlight about your best project."
+          data-tags="web,html,css"
+          data-year="2024"
+          data-stack="HTML CSS"
+        >
+          <div class="featured-text">
+            <p class="kicker">Featured</p>
+            <h2 class="featured-title">Project One</h2>
+            <p class="featured-sub">
+              A short highlight about your best project. Replace this with your real description.
+            </p>
+
+            <div class="featured-meta">
+              <span class="tag">2024</span>
+              <span class="tag">HTML • CSS</span>
+              <span class="tag">Web</span>
+            </div>
+
+            <div class="featured-cta">
+              <span class="btn btn-ghost">View project</span>
+            </div>
+          </div>
+
+          <div class="featured-media">
+            <img src="assets/project1.jpg" alt="Project One preview" loading="lazy" />
+          </div>
+        </a>
+      </section>
+
+      <!-- Projects Grid -->
+      <section class="projects-grid" aria-label="Projects">
+        <article
+          class="card"
+          data-project
+          data-title="Project Two"
+          data-desc="A short description of the second project."
+          data-tags="tools,python,cli"
+          data-year="2024"
+          data-stack="Python"
+        >
+          <a class="card-link" href="#">
+            <div class="card-image">
+              <img src="assets/project2.jpg" alt="Project Two preview" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <div class="card-top">
+                <h3>Project Two</h3>
+                <span class="chip">Tools</span>
+              </div>
+              <p class="card-desc">A short description of the second project.</p>
+              <p class="card-meta">2024 • Python</p>
+              <p class="card-cta">View project →</p>
+            </div>
+          </a>
+        </article>
+
+        <article
+          class="card"
+          data-project
+          data-title="Project Three"
+          data-desc="A short description of the third project."
+          data-tags="linux,bash,automation"
+          data-year="2024"
+          data-stack="Linux Bash"
+        >
+          <a class="card-link" href="#">
+            <div class="card-image">
+              <img src="assets/project3.jpg" alt="Project Three preview" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <div class="card-top">
+                <h3>Project Three</h3>
+                <span class="chip">Linux</span>
+              </div>
+              <p class="card-desc">A short description of the third project.</p>
+              <p class="card-meta">2024 • Linux</p>
+              <p class="card-cta">View project →</p>
+            </div>
+          </a>
+        </article>
+
+        <article
+          class="card"
+          data-project
+          data-title="Project Four"
+          data-desc="PC build / setup / mod project."
+          data-tags="hardware,pc,build"
+          data-year="2023"
+          data-stack="Hardware"
+        >
+          <a class="card-link" href="#">
+            <div class="card-image">
+              <img src="assets/project1.jpg" alt="Project Four preview" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <div class="card-top">
+                <h3>Project Four</h3>
+                <span class="chip">Hardware</span>
+              </div>
+              <p class="card-desc">PC build / setup / mod project.</p>
+              <p class="card-meta">2023 • Hardware</p>
+              <p class="card-cta">View project →</p>
+            </div>
+          </a>
+        </article>
+      </section>
+
+      <div id="emptyState" class="empty-state" hidden>
+        <p>No projects match your search.</p>
+        <button class="btn btn-ghost" type="button" id="clearFiltersBtn">Clear filters</button>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p class="credits">© 2024 — Costope</p>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const searchInput = document.getElementById("projectSearch");
+      const tagButtons = Array.from(document.querySelectorAll(".tag-btn"));
+      const projects = Array.from(document.querySelectorAll("[data-project]"));
+      const emptyState = document.getElementById("emptyState");
+      const clearBtn = document.getElementById("clearFiltersBtn");
+      const hint = document.getElementById("resultHint");
+
+      let activeTag = "all";
+      let query = "";
+
+      const normalize = (s) => (s || "").toString().toLowerCase().trim();
+
+      const projectText = (el) => {
+        const title = normalize(el.dataset.title);
+        const desc = normalize(el.dataset.desc);
+        const tags = normalize(el.dataset.tags).replaceAll(",", " ");
+        const year = normalize(el.dataset.year);
+        const stack = normalize(el.dataset.stack);
+        return `${title} ${desc} ${tags} ${year} ${stack}`;
+      };
+
+      const matchesTag = (el, tag) => {
+        if (tag === "all") return true;
+        const tags = normalize(el.dataset.tags).split(",").map(t => t.trim()).filter(Boolean);
+        return tags.includes(tag);
+      };
+
+      const applyFilters = () => {
+        const q = normalize(query);
+        let visible = 0;
+
+        projects.forEach((el) => {
+          const text = projectText(el);
+          const okQuery = q === "" || text.includes(q);
+          const okTag = matchesTag(el, activeTag);
+          const show = okQuery && okTag;
+
+          el.style.display = show ? "" : "none";
+          if (show) visible++;
+        });
+
+        const total = projects.length;
+        if (hint) hint.textContent = `${visible} / ${total} shown`;
+        if (emptyState) emptyState.hidden = visible !== 0;
+      };
+
+      let t = null;
+      if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+          clearTimeout(t);
+          t = setTimeout(() => {
+            query = e.target.value;
+            applyFilters();
+          }, 120);
+        });
+      }
+
+      tagButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          tagButtons.forEach(b => b.classList.remove("is-active"));
+          btn.classList.add("is-active");
+          activeTag = btn.dataset.filter || "all";
+          applyFilters();
+        });
+      });
+
+      if (clearBtn) {
+        clearBtn.addEventListener("click", () => {
+          query = "";
+          if (searchInput) searchInput.value = "";
+          activeTag = "all";
+          tagButtons.forEach(b => b.classList.remove("is-active"));
+          const allBtn = tagButtons.find(b => b.dataset.filter === "all");
+          if (allBtn) allBtn.classList.add("is-active");
+          applyFilters();
+          if (searchInput) searchInput.focus();
+        });
+      }
+
+      applyFilters();
+    })();
+  </script>
+</body>
+</html>
