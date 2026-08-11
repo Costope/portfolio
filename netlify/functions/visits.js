@@ -14,6 +14,7 @@ export default async (req) => {
 
   if (!isLocalhost) {
     views += 1;
+    console.log('Views updated to: ${views}');
     await store.set('views', views.toString());
   }
 

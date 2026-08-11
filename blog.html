@@ -79,7 +79,7 @@
               <span class="tag">Project</span>
             </div>
           </div>
-          <div class="blog-open">Open →</div>
+          <div class="blog-open">Open <svg class="blog-pfeil-svg"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
         </article>
       </section>
 
@@ -95,7 +95,11 @@
     <div class="modal-backdrop" data-close></div>
 
     <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-close" type="button" aria-label="Close" data-close>✕</button>
+      <button class="modal-close" data-close aria-label="Schließen">
+      <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L19 19M1 19L19 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
 
       <div class="modal-hero">
         <img id="modalImg" src="" alt="" />
@@ -106,6 +110,8 @@
         <h2 class="modal-title" id="modalTitle"></h2>
         <p class="modal-excerpt" id="modalExcerpt"></p>
         <p class="modal-tags" id="modalTags"></p>
+
+        <hr class="modal-divider">
 
         <div class="modal-body" id="modalBody"></div>
       </div>
@@ -129,10 +135,15 @@
       const clearBtn = document.getElementById("blogClear");
 
       let lastFocus = null;
+      let scrollPosition = 0;
 
       const openModal = (card) => {
         lastFocus = document.activeElement;
 
+        // 1. Exakte Scroll-Position sichern
+        scrollPosition = window.scrollY || document.documentElement.scrollTop;
+
+        // 2. Inhalte setzen
         modalImg.src = card.dataset.image || "";
         modalImg.alt = card.dataset.title || "Blog image";
         modalTitle.textContent = card.dataset.title || "";
@@ -141,24 +152,42 @@
         modalTags.textContent = card.dataset.tags || "";
         modalBody.innerHTML = card.dataset.body || "<p>No content yet.</p>";
 
+        // 3. Body fixieren, damit iOS nicht im Hintergrund scrollt
+        document.body.style.position = "fixed";
+        document.body.style.top = `-${scrollPosition}px`;
+        document.body.style.left = "0";
+        document.body.style.right = "0";
+        document.body.style.width = "100%";
+
+        // 4. Modal anzeigen
         modal.classList.add("is-open");
         modal.setAttribute("aria-hidden", "false");
-        
-        document.body.classList.add("modal-open");
-        document.documentElement.classList.add("modal-open");
 
         const closeBtn = modal.querySelector(".modal-close");
         if (closeBtn) closeBtn.focus();
       };
 
       const closeModal = () => {
+        // 1. Schließ-Animation starten
         modal.classList.remove("is-open");
         modal.setAttribute("aria-hidden", "true");
-        
-        document.body.classList.remove("modal-open");
-        document.documentElement.classList.remove("modal-open");
 
-        if (lastFocus && lastFocus.focus) lastFocus.focus();
+        // 2. Erst NACH der Animation (300ms) den Body freigeben & springen
+        setTimeout(() => {
+          document.body.style.position = "";
+          document.body.style.top = "";
+          document.body.style.left = "";
+          document.body.style.right = "";
+          document.body.style.width = "";
+
+          // 'instant' verhindert das sanfte (sichtbare) Zurückscrollen auf iOS
+          window.scrollTo({
+            top: scrollPosition,
+            behavior: "instant"
+          });
+
+          if (lastFocus && lastFocus.focus) lastFocus.focus();
+        }, 300); // Entspricht genau der CSS transition Dauer
       };
 
       cards.forEach((card) => {
@@ -172,7 +201,9 @@
       });
 
       modal.addEventListener("click", (e) => {
-        if (e.target && e.target.matches("[data-close]")) closeModal();
+        if (e.target.closest("[data-close]")) {
+          closeModal();
+        }
       });
 
       window.addEventListener("keydown", (e) => {
@@ -217,6 +248,5 @@
       applySearch();
     })();
   </script>
-  <script src="navbar.js"></script>
 </body>
 </html>

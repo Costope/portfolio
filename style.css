@@ -1089,6 +1089,17 @@ nav::before {
   opacity: 0.7;
 }
 
+.blog-pfeil-svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+    vertical-align: middle;
+}
+
 /* Modal */
 html.modal-open,
 body.modal-open {
@@ -1098,15 +1109,18 @@ body.modal-open {
 .modal {
   position: fixed;
   inset: 0;
-  display: none;
-  z-index: 999;
-}
-
-/* Flexbox zentriert das Pop-up mittig (gleicher Abstand oben & unten) */
-.modal.is-open {
-  display: flex !important;
+  display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 99999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal.is-open {
+  opacity: 1;
+  visibility: visible;
 }
 
 .modal-backdrop {
@@ -1119,16 +1133,35 @@ body.modal-open {
 
 .modal-dialog {
   position: relative;
-  z-index: 2;
+  z-index: 100;
   max-width: 900px;
   width: calc(100% - 32px);
-  max-height: 85vh; /* Max 85% Bildschirmhöhe = exakt gleicher Abstand oben und unten */
-  margin: 0 auto; /* Ersetzt das alte 70px margin, das zum Ankleben am Boden führte */
-  overflow-y: auto; /* Scrollen nur innerhalb der Box */
+  max-height: 85vh;
+  margin: 0 auto;
+  overflow-y: auto;
   border-radius: 18px;
   border: 1px solid var(--soft);
   background: #050505;
   box-shadow: 0 30px 90px rgba(0, 0, 0, 0.75);
+
+  /* Animation für den Dialog-Kasten (Zoom & Elevate) */
+  opacity: 0;
+  transform: scale(0.94) translateY(12px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+/* Wenn das Modal offen ist: Dialog fährt sanft ein */
+.modal.is-open .modal-dialog {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.modal-divider {
+  margin-top: 20px;
+  border: none;
+  height: 1px;
+  background-color: var(--fg);
+  border-radius: 3px;
 }
 
 .modal-close {
@@ -1138,18 +1171,31 @@ body.modal-open {
   width: 38px;
   height: 38px;
   border-radius: 999px;
-  border: 1px solid var(--soft);
-  background: rgba(255, 255, 255, 0.06);
-  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  
+  background: #111111; 
+  color: #ffffff; 
+  
   cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease;
-  z-index: 10;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  z-index: 999; 
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
+
 .modal-close:hover {
   transform: translateY(-2px);
-  border-color: var(--border);
+  background: #000000;
+  border-color: #ffffff;
+}
+
+.modal-close svg {
+  width: 14px;
+  height: 14px;
+  pointer-events: none; 
 }
 
 .modal-hero {
