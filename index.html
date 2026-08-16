@@ -55,15 +55,15 @@
         <div class="stats" aria-label="Quick stats">
           <div class="stat">
             <div class="stat-num">5+ Yrs</div>
-            <div class="stat-label">Coding experience</div>
+            <div class="stat-label">Coding Experience</div>
           </div>
           <div class="stat">
-            <div class="stat-num">Linux</div>
-            <div class="stat-label">Daily driver</div>
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Open Source Projects</div>
           </div>
           <div class="stat">
-            <div class="stat-num">PC</div>
-            <div class="stat-label">Build & tweak</div>
+            <div class="stat-num">Rock-Solid</div>
+            <div class="stat-label">Tested until it's bulletproof</div>
           </div>
         </div>
       </section>
@@ -219,7 +219,7 @@
                 </div>
                 <span class="pill">Solid</span>
               </div>
-              <div class="meter" aria-label="Git level">
+              <div class="meter" aria-label="Java level">
                 <span style="width: 35%"></span>
               </div>
               <p class="skill-text">Building reusable methods, clean OOP structures, and efficient logic.</p>
@@ -346,33 +346,53 @@
       const more = document.getElementById("moreSkills");
       if (!btn || !more) return;
 
-      // start closed
+      let isOpen = false;
+      let currentHandler = null;
+
+      const clearHandler = () => {
+        if (currentHandler) {
+          more.removeEventListener("transitionend", currentHandler);
+          currentHandler = null;
+        }
+      };
+
+      more.classList.add("is-collapsed");
       btn.setAttribute("aria-expanded", "false");
       btn.textContent = "Expand skills";
 
       const open = () => {
-        more.classList.remove("is-collapsed");
+        clearHandler();
+        more.classList.remove("is-collapsed", "is-closing");
         more.classList.add("is-opening");
 
-        const h = more.scrollHeight;
-        more.style.maxHeight = h + "px";
+        const startHeight = more.getBoundingClientRect().height;
+        more.style.maxHeight = startHeight + "px";
 
-        more.addEventListener("transitionend", function onEnd(e) {
+        more.offsetHeight;
+
+        const targetHeight = more.scrollHeight;
+        more.style.maxHeight = targetHeight + "px";
+
+        currentHandler = (e) => {
           if (e.propertyName !== "max-height") return;
-          more.removeEventListener("transitionend", onEnd);
+          clearHandler();
           more.classList.remove("is-opening");
           more.classList.add("is-open");
           more.style.maxHeight = "none";
-        });
+        };
+        more.addEventListener("transitionend", currentHandler);
 
+        isOpen = true;
         btn.setAttribute("aria-expanded", "true");
         btn.textContent = "Collapse skills";
       };
 
       const close = () => {
-        more.classList.remove("is-open");
-        const h = more.scrollHeight;
-        more.style.maxHeight = h + "px";
+        clearHandler();
+        more.classList.remove("is-open", "is-opening");
+
+        const startHeight = more.getBoundingClientRect().height;
+        more.style.maxHeight = startHeight + "px";
 
         // force reflow
         more.offsetHeight;
@@ -380,20 +400,21 @@
         more.classList.add("is-closing");
         more.style.maxHeight = "0px";
 
-        more.addEventListener("transitionend", function onEnd(e) {
+        currentHandler = (e) => {
           if (e.propertyName !== "max-height") return;
-          more.removeEventListener("transitionend", onEnd);
+          clearHandler();
           more.classList.remove("is-closing");
           more.classList.add("is-collapsed");
-        });
+        };
+        more.addEventListener("transitionend", currentHandler);
 
+        isOpen = false;
         btn.setAttribute("aria-expanded", "false");
         btn.textContent = "Expand skills";
       };
 
       btn.addEventListener("click", () => {
-        const expanded = btn.getAttribute("aria-expanded") === "true";
-        if (expanded) close();
+        if (isOpen) close();
         else open();
       });
     })();
@@ -407,7 +428,6 @@
       heart.classList.add('floating-heart');
       heart.innerHTML = '❤️';
       
-      // Position des geklickten Herzes auf dem Bildschirm bestimmen
       const rect = this.getBoundingClientRect();
       const startX = rect.left + rect.width / 2;
       const startY = rect.top + rect.height / 2;
@@ -415,16 +435,16 @@
       heart.style.left = `${startX}px`;
       heart.style.top = `${startY}px`;
       
-      // Zufällige Flugrichtung berechnen (nach oben, links, rechts)
-      const randomX = (Math.random() - 0.5) * 120 + 'px'; // -60px bis +60px seitlich
-      const randomY = (Math.random() * -80 - 30) + 'px';  // -30px bis -110px nach oben
+      // Zufällige Flugrichtung berechnen
+      const randomX = (Math.random() - 0.5) * 120 + 'px';
+      const randomY = (Math.random() * -80 - 30) + 'px';
       
       heart.style.setProperty('--x', randomX);
       heart.style.setProperty('--y', randomY);
       
       document.body.appendChild(heart);
       
-      // Nach Ende der Animation aus dem DOM löschen
+      // Nach Ende der Animation ausm DOM löschen
       setTimeout(() => {
         heart.remove();
       }, 800);
@@ -432,7 +452,6 @@
   });
 
 
-  // Ruft DEINE EIGENE Netlify Function auf
   fetch('/.netlify/functions/visits')
     .then(response => {
       if (!response.ok) throw new Error('Netlify Function Fehler');

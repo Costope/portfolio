@@ -53,7 +53,7 @@ body {
 }
 
 .container {
-  max-width: 100%;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 0 24px;
   padding-bottom: 18px;
@@ -120,15 +120,12 @@ nav {
   padding: 14px 24px;
   z-index: 1000;
 
-  /* Der Rahmen kommt auf das Haupt-Element – so bleibt er absolut scharf */
   border: 1px solid var(--border);
   border-radius: 8px;
 
-  /* Wichtig, damit das schwebende Blur-Element genau in der Box bleibt */
   overflow: hidden;
 }
 
-/* Das Pseudo-Element erzeugt den perfekten Blur NUR für den Hintergrund */
 nav::before {
   content: '';
   position: absolute;
@@ -137,7 +134,6 @@ nav::before {
   right: 0;
   bottom: 0;
 
-  /* Ein ganz leichtes Graublau mit weniger Deckkraft */
   background-color: rgba(25, 25, 25, 0.5);
 
   backdrop-filter: blur(16px);
@@ -175,8 +171,8 @@ nav::before {
   font-size: 15px;
   opacity: 0.6;
   transition: opacity 0.3s ease;
-  -webkit-touch-callout: none; /* Blockiert die Safari-Link-Vorschau auf iOS */
-  -webkit-user-select: none;   /* Verhindert, dass der Text blau markiert wird */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
   user-select: none;
 }
 .nav-links a::after {
@@ -205,30 +201,26 @@ nav::before {
    MOBILE NAVIGATION
    ======================== */
 @media (max-width: 600px) {
-  /* 1. Blur direkt auf der Navbar – sauber isoliert */
   nav {
-    position: fixed; /* Oder relative/sticky, je nach Wunsch */
+    position: fixed;
     top: 10px;
     left: 16px;
     right: 16px;
     padding: 12px 16px;
     overflow: hidden;
 
-    /* Blur & Hintergrund direkt auf das nav setzen */
-    background: rgba(18, 18, 18, 0.75); 
+    background: rgba(18, 18, 18, 0.75);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    
+
     border-radius: 12px;
     z-index: 1000;
   }
 
-  /* Deaktiviere das alte nav::before komplett */
   nav::before {
     display: none !important;
   }
 
-  /* 2. Flexbox für Layout */
   .nav-inner {
     display: flex;
     align-items: center;
@@ -237,12 +229,10 @@ nav::before {
     width: 100%;
   }
 
-  /* 3. Logo bleibt links verankert */
   .brand {
     flex-shrink: 0;
   }
 
-/* 4. Isolierter Masken-Effekt NUR für die Links */
   .nav-links {
     overflow-y: hidden;
     display: flex;
@@ -252,11 +242,9 @@ nav::before {
     white-space: nowrap;
     min-width: 0;
 
-    /* Touch-Scroll & Scrollbar verbergen */
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
 
-    /* Stufenlos dynamische Maske */
     -webkit-mask-image: linear-gradient(
       to right,
       transparent 0%,
@@ -399,7 +387,7 @@ nav::before {
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.3);
   display: inline-flex !important;
-  align-items: center; /* Zentriert alles vertikal */
+  align-items: center;
   gap: 8px;
 }
 
@@ -548,7 +536,6 @@ nav::before {
   border-color: var(--border);
 }
 
-/* Obere Zeile: Schiebt Header (links) und Pill (rechts) auseinander */
 .skill-top {
   display: flex;
   justify-content: space-between;
@@ -556,11 +543,10 @@ nav::before {
   gap: 12px;
 }
 
-/* Packt Logo + Text direkt nebeneinander */
 .skill-header {
   display: flex;
   align-items: center;
-  gap: 10px; /* Exakter Abstand zwischen Icon und Text */
+  gap: 10px;
 }
 
 .skill-header h3 {
@@ -570,7 +556,6 @@ nav::before {
   line-height: 1;
 }
 
-/* Stylt das SVG-Icon */
 .skill-tech-icon {
   width: 18px;
   height: 18px;
@@ -578,7 +563,7 @@ nav::before {
   display: block;
   flex-shrink: 0;
   opacity: 0.85;
-  order: -1; /* Schiebt das Logo nach links VOR das Wort HTML */
+  order: -1;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
@@ -588,7 +573,7 @@ nav::before {
   display: block;
   flex-shrink: 0;
   opacity: 0.85;
-  order: -1; /* Schiebt das Logo nach links VOR das Wort HTML */
+  order: -1;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
@@ -633,13 +618,11 @@ nav::before {
   justify-content: center;
 }
 
-/* Größe des Logos anpassen */
 .tech-icon {
   width: 20px;
   height: 20px;
 }
 
-/* Animated collapsible */
 .skills-more {
   margin-top: 16px;
   overflow: hidden;
@@ -693,7 +676,7 @@ nav::before {
 .learning-item {
   display: flex;
   gap: 10px;
-  align-items: center; /* Geändert von flex-start auf center */
+  align-items: center;
   border: 1px solid var(--soft);
   border-radius: 16px;
   padding: 14px 14px;
@@ -702,10 +685,10 @@ nav::before {
 .svg-pfeil {
   opacity: 0.7;
   padding-right: 26px;
-  width: 14px; /* Passende Größe zum Text */
+  width: 14px;
   height: 14px;
   fill: none;
-  stroke: var(--fg); /* Übernimmt die Textfarbe (weiß) */
+  stroke: var(--fg);
   stroke-width: 2px;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -726,14 +709,14 @@ nav::before {
 }
 
 .svg-halber-pfeil {
-  width: 14px; /* Breite des Icons */
-  height: 14px; /* Höhe des Icons */
-  color: white; /* Linienfarbe (funktioniert dank stroke: currentColor) */
-  fill: none; /* Keine Innenfläche */
-  stroke: currentColor; /* Nutzt die 'color'-Eigenschaft */
-  stroke-width: 2px; /* Dicke der Linien */
-  stroke-linecap: round; /* Abgerundete Enden */
-  stroke-linejoin: round; /* Abgerundete Ecken */
+  width: 14px;
+  height: 14px;
+  color: white;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   transition: transform 0.2s ease;
 }
 
@@ -754,6 +737,147 @@ nav::before {
   display: flex;
   align-items: center;
   flex-shrink: 0;
+}
+
+/* =========================
+   ABOUT — PROFILE SPLIT
+========================= */
+.profile-split {
+  margin-top: 22px;
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 28px;
+  align-items: start;
+  text-align: left;
+}
+
+.profile-avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--fg);
+  flex-shrink: 0;
+}
+
+.profile-body {
+  min-width: 0;
+}
+
+.profile-text {
+  margin: 0 0 14px;
+  font-size: 15px;
+  line-height: 1.8;
+  opacity: 0.78;
+}
+
+.profile-text:last-of-type {
+  margin-bottom: 0;
+}
+
+.quote-block {
+  margin: 22px 0 0;
+  padding: 16px 20px;
+  border-left: 2px solid var(--border-strong);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.7;
+  color: var(--fg);
+  opacity: 0.9;
+}
+
+.quote-mark {
+  opacity: 0.4;
+  font-size: 22px;
+  line-height: 0;
+  vertical-align: -2px;
+  margin-right: 2px;
+}
+
+/* =========================
+   ABOUT — SPEC SHEET
+========================= */
+.spec-sheet {
+  margin: 22px 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.spec-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 18px;
+  border: 1px solid var(--soft);
+  border-radius: var(--radius-md);
+  text-align: left;
+  transition: border-color 0.25s ease;
+}
+
+.spec-row:hover {
+  border-color: var(--border);
+}
+
+.spec-key {
+  margin: 0;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+.spec-val {
+  margin: 0;
+  font-size: 15px;
+  opacity: 0.85;
+  line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+  .spec-sheet {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-split {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .profile-body {
+    text-align: left;
+  }
+}
+
+/* =========================
+   ABOUT — PROJECT SPOTLIGHT
+========================= */
+.project-spotlight {
+  margin-top: 22px;
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 24px;
+  border: 1px solid var(--soft);
+  border-radius: var(--radius-lg);
+  text-align: left;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 /* =========================
@@ -865,9 +989,9 @@ nav::before {
 }
 
 .featured-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-5px);
   border-color: var(--border);
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.08);
+  box-shadow: 0 3px 16px rgba(255, 255, 255, 0.08);
 }
 
 .featured-text {
@@ -929,9 +1053,9 @@ nav::before {
 }
 
 .card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-5px);
   border-color: var(--border);
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.08);
+  box-shadow: 0 3px 16px rgba(255, 255, 255, 0.08);
 }
 
 .card-link {
@@ -1028,9 +1152,9 @@ nav::before {
 }
 
 .blog-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-5px);
   border-color: var(--border);
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.08);
+  box-shadow: 0 3px 16px rgba(255, 255, 255, 0.08);
 }
 
 .blog-card:focus-visible {
@@ -1144,13 +1268,11 @@ body.modal-open {
   background: #050505;
   box-shadow: 0 30px 90px rgba(0, 0, 0, 0.75);
 
-  /* Animation für den Dialog-Kasten (Zoom & Elevate) */
   opacity: 0;
   transform: scale(0.94) translateY(12px);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
 }
 
-/* Wenn das Modal offen ist: Dialog fährt sanft ein */
 .modal.is-open .modal-dialog {
   opacity: 1;
   transform: scale(1) translateY(0);
@@ -1172,17 +1294,17 @@ body.modal-open {
   height: 38px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  
-  background: #111111; 
-  color: #ffffff; 
-  
+
+  background: #111111;
+  color: #ffffff;
+
   cursor: pointer;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  z-index: 999; 
+
+  z-index: 999;
   transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
@@ -1195,7 +1317,7 @@ body.modal-open {
 .modal-close svg {
   width: 14px;
   height: 14px;
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 .modal-hero {
@@ -1378,9 +1500,8 @@ body.modal-open {
   color: #ccc;
 }
 
-/* Verwandelt das native Input in einen Custom Ring */
 .check input[type="radio"] {
-  appearance: none; /* Blendet das Browser-Design aus */
+  appearance: none;
   width: 18px;
   height: 18px;
   border: 2px solid #444;
@@ -1392,25 +1513,23 @@ body.modal-open {
   transition: all 0.2s ease;
 }
 
-/* Erzeugt den inneren ausgefüllten Punkt bei Auswahl */
 .check input[type="radio"]::before {
   content: "";
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: #000;
-  transform: scale(0); /* Normalerweise unsichtbar */
+  transform: scale(0);
   transition: transform 0.15s ease-in-out;
 }
 
-/* Zustand wenn ausgewählt */
 .check input[type="radio"]:checked {
   border-color: #fff;
   background: #fff;
 }
 
 .check input[type="radio"]:checked::before {
-  transform: scale(1); /* Macht den inneren Punkt sichtbar */
+  transform: scale(1);
 }
 
 .check:hover {
@@ -1430,20 +1549,6 @@ body.modal-open {
   justify-content: flex-start;
 }
 
-.form-hint {
-  margin: 12px 0 0;
-  font-size: 12px;
-  opacity: 0.6;
-  line-height: 1.6;
-}
-
-.form-hint code {
-  font-family:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
-    'Courier New', monospace;
-  font-size: 12px;
-}
-
 /* =========================
    FOOTER
 ========================= */
@@ -1454,11 +1559,10 @@ body.modal-open {
 .credits {
   font-size: 12px;
   opacity: 0.5;
-  user-select: none; /* Falls der User etwas länger drückt aufm Handy und dann ausversehen was makiert */
+  user-select: none;
   -webkit-user-select: none;
 }
 
-/* 1. Standard-Style für deinen Link */
 .footer-link {
   color: #3B82F6;
   text-decoration: none;
@@ -1467,7 +1571,6 @@ body.modal-open {
   transition: color 0.2s ease-in-out;
 }
 
-/* 2. Die unsichtbare Linie in der Mitte vorbereiten */
 .footer-link::after {
   content: '';
   position: absolute;
@@ -1477,10 +1580,9 @@ body.modal-open {
   left: 50%;
   transform: translateX(-50%);
   background-color: #60A5FA;
-  transition: width 0.3s ease-in-out;
+  transition: width 0.25s ease-in-out;
 }
 
-/* 3. Hover-Effekt: Farbe ändern & Linie ausfahren */
 .footer-link:hover {
   color: #60A5FA;
 }
@@ -1498,13 +1600,12 @@ body.modal-open {
 }
 
 #heart-easter-egg:active {
-  transform: scale(1.2); /* Kurzer Feedback-Klick-Effekt */
+  transform: scale(1.2);
 }
 
-/* Das fliegende Party-Herz */
 .floating-heart {
   position: fixed;
-  pointer-events: none; /* Verhindert Klicks auf die fliegenden Herzen */
+  pointer-events: none;
   font-size: 14px;
   z-index: 9999;
   animation: floatAndFade 0.8s ease-out forwards;
@@ -1517,12 +1618,10 @@ body.modal-open {
   }
   100% {
     opacity: 0;
-    /* Die Variablen --x und --y werden per JS zufällig berechnet */
     transform: translate(var(--x), var(--y)) scale(1.4);
   }
 }
 
-/* Badge für die Aufrufe */
 .views-badge {
   display: inline-flex;
   align-items: center;
@@ -1537,7 +1636,6 @@ body.modal-open {
   user-select: none;
 }
 
-/* Styling für das SVG-Auge */
 .eye-icon {
   width: 14px;
   height: 14px;
@@ -1547,7 +1645,7 @@ body.modal-open {
 #global-visits {
   color: #eee;
   font-weight: 500;
-  font-family: monospace; /* Monospace macht Zahlen bei Änderung hübscher */
+  font-family: monospace;
 }
 
 /* =========================
@@ -1601,4 +1699,3 @@ body.modal-open {
     align-items: flex-start;
   }
 }
-

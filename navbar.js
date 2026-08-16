@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <a href="projects.html" id="nav-projects">projects</a>
           <a href="blog.html" id="nav-blog">blog</a>
           <a href="contact.html" id="nav-contact">contact</a>
-          <a href="#" id="nav-about">about</a>
+          <a href="about.html" id="nav-about">about</a>
         </div>
       </div>
     </nav>
@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (currentPage === "contact.html") document.getElementById("nav-contact")?.classList.add("active");
   if (currentPage === "about.html") document.getElementById("nav-about")?.classList.add("active");
 
-  // Seiten die noch in Arbeit sind bekommen nen Alert
-  const unfinishedPages = ["nav-about"]; // Liste ist effizienter :)
+  // Seiten die noch nicht fertig sind, werden mit einem Alert versehen
+  const unfinishedPages = [""];
 
   unfinishedPages.forEach(id => {
     const link = document.getElementById(id);
@@ -37,8 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
       link.addEventListener("click", (event) => {
         // Verhindert, dass der Browser dem Link folgt oder die Seite neu lädt
         event.preventDefault(); 
-        
-        // Zeigt den simplen JavaScript-Alert mit dem geschwungenen Apostroph an
         alert("🛠️ Coming Soon! I'm currently working on this page 🛠️ :)");
       });
     }
