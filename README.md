@@ -6,7 +6,7 @@
 ![Host](https://img.shields.io/badge/Hosted_on-Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
 
-[**🌐 Live Demo**](https://costope.dev) • [**🐛 Report Bug**](https://github.com/yourusername/portfolio/issues)
+[**🌐 Live Demo**](https://costope.dev) • [**🐛 Report Bug**](https://github.com/Costope/portfolio/issues)
 
 </div>
 
