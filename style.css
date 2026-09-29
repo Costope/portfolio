@@ -126,7 +126,7 @@ main {
   color: transparent;
   -webkit-text-fill-color: transparent;
 
-  transition: text-shadow 0.9s ease; 
+  transition: text-shadow 0.9s ease, opacity 0.3s ease;
 }
 
 #nav-valtro::after {
