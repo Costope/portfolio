@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <a href="blog.html" id="nav-blog">blog</a>
           <a href="contact.html" id="nav-contact">contact</a>
           <a href="about.html" id="nav-about">about</a>
+          <a href="valtro.costope.dev" id="nav-valtro">Valtro</a>
         </div>
       </div>
     </nav>
