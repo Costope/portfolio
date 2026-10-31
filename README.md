@@ -12,7 +12,7 @@
 
 ---
 
-> **Overview:** A minimal, dark-themed developer portfolio crafted with plain HTML, CSS, and vanilla JavaScript. Built with a performance-first mindset, clean architecture, and zero bloat.
+> **Overview:** A minimal, dark-themed developer portfolio crafted with HTML, CSS, and vanilla JavaScript. Built with the goal to make a clean, progressive and sorted layout.
 
 ---
 
@@ -43,11 +43,3 @@ AI (Gemini) was utilized as a technical assistant for:
 ## License
 
 Distributed under the **MIT License**.
-
----
-
-<div align="center">
-
-Made with ❤️
-
-</div>
